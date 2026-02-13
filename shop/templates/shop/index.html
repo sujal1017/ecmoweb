@@ -1,0 +1,80 @@
+{% extends 'shop/basic.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<div class="container my-4">
+
+  <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-inner">
+
+      {% for chunk in chunks %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="row text-center">
+
+          {% for product in chunk %}
+          <div class="col-md-4">
+            <div class="card product-card">
+
+              <div class="product-img-wrapper">
+                {% if product.image %}
+                  <img src="{{ product.image.url }}">
+                {% else %}
+                  <img src="{% static 'shop/default.png' %}">
+                {% endif %}
+              </div>
+
+              <div class="card-body">
+                <h5>{{ product.product_name }}</h5>
+                <p>{{ product.desc }}</p>
+                <p><strong>₹ {{ product.price }}</strong></p>
+                <a class="btn btn-primary">Buy</a>
+              </div>
+
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+
+    <!-- LEFT ARROW -->
+    <button class="carousel-control-prev"
+            type="button"
+            data-bs-target="#demo"
+            data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <!-- RIGHT ARROW -->
+    <button class="carousel-control-next"
+            type="button"
+            data-bs-target="#demo"
+            data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+
+  </div>
+
+  <!-- CUSTOM DASH INDICATORS BELOW -->
+  <div class="custom-indicators mt-3">
+
+    {% for chunk in chunks %}
+    <button type="button"
+            data-bs-target="#demo"
+            data-bs-slide-to="{{ forloop.counter0 }}"
+            class="dash-indicator {% if forloop.first %}active{% endif %}">
+    </button>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+{% endblock %}
