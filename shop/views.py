@@ -5,20 +5,26 @@ from .models import Product
 
 def index(request):
 
-    products = list(Product.objects.all())
-
+    allprods = []
     chunk_size = 3
 
-    # Create chunks
-    chunks1 = [products[i:i+chunk_size] for i in range(0, len(products), chunk_size)]
-    chunks2 = [products[i:i+chunk_size] for i in range(0, len(products), chunk_size)]
+    # Get unique categories
+    categories = Product.objects.values_list('category', flat=True).distinct()
 
-    # Store both inside one list
-    allprods = [chunks1, chunks2]
+    for category in categories:
+
+        products = list(Product.objects.filter(category=category))
+
+        # Create chunks for this category
+        chunks = [products[i:i+chunk_size] for i in range(0, len(products), chunk_size)]
+
+        # Store category name + its chunks
+        allprods.append((category, chunks))
 
     return render(request, "shop/index.html", {
         "allprods": allprods
     })
+
 
 
 def about(request):
