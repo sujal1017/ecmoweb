@@ -7,17 +7,11 @@
 
 <div class="container my-4">
 
-  {% for chunks in allprods %}
+  {% for category, chunks in allprods %}
 
-    <h2 class="mt-5">
-      {% if forloop.counter == 1 %}
-        Men Fashion
-      {% else %}
-        New Arrivals
-      {% endif %}
-    </h2>
+    <h2 class="mt-5">{{ category }}</h2>
 
-    <div id="demo{{ forloop.counter }}" 
+    <div id="carousel{{ forloop.counter }}" 
          class="carousel slide" 
          data-bs-ride="carousel">
 
@@ -58,14 +52,14 @@
 
       <button class="carousel-control-prev"
               type="button"
-              data-bs-target="#demo{{ forloop.counter }}"
+              data-bs-target="#carousel{{ forloop.counter }}"
               data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
       </button>
 
       <button class="carousel-control-next"
               type="button"
-              data-bs-target="#demo{{ forloop.counter }}"
+              data-bs-target="#carousel{{ forloop.counter }}"
               data-bs-slide="next">
         <span class="carousel-control-next-icon"></span>
       </button>
