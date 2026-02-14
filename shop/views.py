@@ -1,20 +1,28 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Product
-import math
 
-# Create your views here.
 
 def index(request):
+
     products = list(Product.objects.all())
 
     chunk_size = 3
-    chunks = [products[i:i+chunk_size] for i in range(0, len(products), chunk_size)]
 
-    return render(request, "shop/index.html", {"chunks": chunks})
+    # Create chunks
+    chunks1 = [products[i:i+chunk_size] for i in range(0, len(products), chunk_size)]
+    chunks2 = [products[i:i+chunk_size] for i in range(0, len(products), chunk_size)]
+
+    # Store both inside one list
+    allprods = [chunks1, chunks2]
+
+    return render(request, "shop/index.html", {
+        "allprods": allprods
+    })
+
 
 def about(request):
-     return render(request,'shop/about.html')
+    return render(request,'shop/about.html')
 
 def contact(request):
     return HttpResponse("We are at Contact")
@@ -30,5 +38,3 @@ def productview(request):
 
 def checkout(request):
     return HttpResponse("We are at CheckOut")
-
-
