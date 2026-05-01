@@ -36,11 +36,23 @@
 }
 
 /* CAROUSEL ARROWS */
+/* Reduce overlay width */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;   /* shrink clickable area */
+}
+
+/* Make arrows clearly visible */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-color: black;
   border-radius: 50%;
-  padding: 20px;
+  padding: 10px;
+}
+
+/* Prevent overlap with content */
+.carousel {
+  padding: 0 40px;
 }
 
   </style>
@@ -49,9 +61,28 @@
 
 <body>
 
-<nav class="navbar navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="/shop/">My Cart</a>
+    <a class="navbar-cart" href="#">Cart(<span id="cart">0</span>)</a>
+  </div>
+</nav> -->
+
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    
+    <!-- Brand -->
+    <a class="navbar-brand" href="/shop/">My Cart</a>
+
+    <!-- Right Side Cart -->
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link text-white" href="/shop/cart/">
+          🛒 Cart (<span id="cart">0</span>)
+        </a>
+      </li>
+    </ul>
+
   </div>
 </nav>
 
@@ -60,4 +91,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% block js %} {% endblock %}
 </html>
