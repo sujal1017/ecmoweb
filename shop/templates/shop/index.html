@@ -92,6 +92,7 @@
     }
     else{
       cart[idstr] = 1;
+      document.getElementById('cart').innerHTML=Object.keys(cart).length;
     }
     console.log(cart);
     /* 
@@ -99,6 +100,7 @@
     var idstr = this.id.toString();
     console.log(idstr);
     */
+    document.getElementById('cart').innerHTML=Object.keys(cart).length;
   });
 </script>
 {% endblock %}
